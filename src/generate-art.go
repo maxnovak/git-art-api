@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"strings"
 )
 
@@ -25,5 +26,22 @@ func main() {
 	}
 	design = strings.Replace(design, "\n", "", -1)
 
-	fmt.Printf("Name of Repo '%s' & design '%s'", repoName, design)
+	fmt.Printf("Name of Repo '%s' & design '%s:' (y/n): ", repoName, design)
+	confirmation, _, err := reader.ReadRune()
+	if err != nil {
+		log.Fatal(err)
+	}
+	if confirmation != 'y' {
+		os.Exit(0)
+	}
+
+	fmt.Println("Creating repository")
+	os.MkdirAll("./"+repoName, os.ModePerm)
+	createRepo := exec.Command("git", "init")
+	createRepo.Dir = repoName
+	output, err := createRepo.CombinedOutput()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(output))
 }
