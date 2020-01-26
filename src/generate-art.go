@@ -44,4 +44,23 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(string(output))
+
+	os.Chdir(repoName)
+	createCommit()
+
+}
+
+func createCommit() {
+	date := "Wed Feb 16 14:00 2011 +0100"
+	os.Setenv("GIT_AUTHOR_DATE", date)
+	os.Setenv("GIT_COMMITTER_DATE", date)
+
+	args := []string{"commit", "--allow-empty", "--allow-empty-message", "-m ''"}
+	createRepo := exec.Command("git", args...)
+
+	output, err := createRepo.CombinedOutput()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(output))
 }
