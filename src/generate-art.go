@@ -6,7 +6,9 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -18,6 +20,14 @@ func main() {
 		log.Fatal(err)
 	}
 	repoName = strings.Replace(repoName, "\n", "", -1)
+
+	fmt.Print("Year for design: ")
+	year, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatal(err)
+	}
+	year = strings.Replace(year, "\n", "", -1)
+	yearParsed, err := strconv.Atoi(year)
 
 	fmt.Print("Select Design: ")
 	design, err := reader.ReadString('\n')
@@ -46,21 +56,26 @@ func main() {
 	fmt.Println(string(output))
 
 	os.Chdir(repoName)
-	createCommit()
+	date := time.Date(yearParsed, time.January, 1, 0, 0, 0, 0, time.UTC)
+	for {
+		if date.Year() > yearParsed {
+			break
+		}
+		createCommit(date)
+		date = date.Add(time.Hour * 48)
+	}
 
 }
 
-func createCommit() {
-	date := "Wed Feb 16 14:00 2011 +0100"
-	os.Setenv("GIT_AUTHOR_DATE", date)
-	os.Setenv("GIT_COMMITTER_DATE", date)
+func createCommit(date time.Time) {
+	os.Setenv("GIT_AUTHOR_DATE", date.String())
+	os.Setenv("GIT_COMMITTER_DATE", date.String())
 
-	args := []string{"commit", "--allow-empty", "--allow-empty-message", "-m ''"}
+	args := []string{"commit", "--allow-empty", "--allow-empty-message", "-m "}
 	createRepo := exec.Command("git", args...)
 
-	output, err := createRepo.CombinedOutput()
+	_, err := createRepo.CombinedOutput()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(string(output))
 }
