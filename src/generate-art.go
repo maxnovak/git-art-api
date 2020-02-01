@@ -60,13 +60,7 @@ func main() {
 	os.Chdir(repoName)
 	date := time.Date(yearParsed, time.January, 1, 0, 0, 0, 0, time.UTC)
 	if design == "checkered" {
-		for {
-			if date.Year() > yearParsed {
-				break
-			}
-			helpers.CreateCommit(date)
-			date = date.Add(time.Hour * 48)
-		}
+		designs.DrawCheckered(date, yearParsed)
 	}
 	if design == "give" {
 		date = helpers.FindFirstSunday(date)
