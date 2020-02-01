@@ -31,7 +31,7 @@ func main() {
 	year = strings.Replace(year, "\n", "", -1)
 	yearParsed, err := strconv.Atoi(year)
 
-	fmt.Print("Select Design [checkered, give]: ")
+	fmt.Print("Select Design [checkered, give, table flip]: ")
 	design, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
@@ -65,5 +65,9 @@ func main() {
 	if design == "give" {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawGive(date)
+	}
+	if design == "table flip" {
+		date = helpers.FindFirstSunday(date)
+		designs.DrawTableFlip(date)
 	}
 }
