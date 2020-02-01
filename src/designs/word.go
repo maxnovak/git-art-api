@@ -2,11 +2,12 @@ package designs
 
 import (
 	"git-art/src/helpers"
+	"strings"
 	"time"
 )
 
 func DrawWord(word string, date time.Time) {
-	var characters = []rune(word)
+	var characters = []rune(strings.ToLower(word))
 	for _, character := range characters {
 		if character == 'a' {
 			date = drawA(date)
