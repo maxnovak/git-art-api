@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"git-art/src/helpers"
 	"log"
 	"os"
 	"os/exec"
@@ -62,34 +63,14 @@ func main() {
 			if date.Year() > yearParsed {
 				break
 			}
-			createCommit(date)
+			helpers.CreateCommit(date)
 			date = date.Add(time.Hour * 48)
 		}
 	}
 	if design == "give" {
-		date = findFirstSunday(date)
+		date = helpers.FindFirstSunday(date)
 		drawGive(date)
 	}
-}
-
-func createCommit(date time.Time) {
-	os.Setenv("GIT_AUTHOR_DATE", date.String())
-	os.Setenv("GIT_COMMITTER_DATE", date.String())
-
-	args := []string{"commit", "--allow-empty", "--allow-empty-message", "-m "}
-	createRepo := exec.Command("git", args...)
-
-	_, err := createRepo.CombinedOutput()
-	if err != nil {
-		log.Fatal(err)
-	}
-}
-
-func findFirstSunday(date time.Time) time.Time {
-	if int(date.Weekday()) > 0 {
-		return date.Add(time.Hour * 24 * time.Duration(7-int(date.Weekday())))
-	}
-	return date
 }
 
 func drawGive(date time.Time) {
@@ -97,76 +78,72 @@ func drawGive(date time.Time) {
 	date = date.Add(time.Hour * 24 * 7 * 4)
 
 	// Left Arm
-	date = addDays(date, 2)
-	createCommit(date)
-	date = addDays(date, 6)
-	createCommit(date)
-	date = addDays(date, 4)
-	createCommit(date)
-	date = addDays(date, 3)
-	createCommit(date)
-	date = addDays(date, 3)
-	createCommit(date)
-	date = addDays(date, 5)
-	createCommit(date)
-	date = addDays(date, 1)
-	createCommit(date)
+	date = helpers.AddDays(date, 2)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 6)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 4)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 3)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 3)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 5)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 1)
+	helpers.CreateCommit(date)
 
 	// Left Eye
-	date = addDays(date, 20)
-	createCommit(date)
-	date = addDays(date, 6)
-	createCommit(date)
-	date = addDays(date, 1)
-	createCommit(date)
+	date = helpers.AddDays(date, 20)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 6)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 1)
+	helpers.CreateCommit(date)
 
 	// Mouth
-	date = addDays(date, 9)
-	createCommit(date)
-	date = addDays(date, 7)
-	createCommit(date)
-	date = addDays(date, 7)
-	createCommit(date)
-	date = addDays(date, 7)
-	createCommit(date)
+	date = helpers.AddDays(date, 9)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 7)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 7)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 7)
+	helpers.CreateCommit(date)
 
 	// Right Eye
-	date = addDays(date, 5)
-	createCommit(date)
-	date = addDays(date, 6)
-	createCommit(date)
-	date = addDays(date, 1)
-	createCommit(date)
+	date = helpers.AddDays(date, 5)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 6)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 1)
+	helpers.CreateCommit(date)
 
 	// Right Side
-	date = addDays(date, 13)
-	createCommit(date)
-	date = addDays(date, 8)
-	createCommit(date)
-	date = addDays(date, 8)
-	createCommit(date)
-	date = addDays(date, 1)
-	createCommit(date)
-	date = addDays(date, 8)
-	createCommit(date)
+	date = helpers.AddDays(date, 13)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 8)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 8)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 1)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 8)
+	helpers.CreateCommit(date)
 
 	// Right Arm
-	date = addDays(date, 4)
-	createCommit(date)
-	date = addDays(date, 6)
-	createCommit(date)
-	date = addDays(date, 4)
-	createCommit(date)
-	date = addDays(date, 3)
-	createCommit(date)
-	date = addDays(date, 3)
-	createCommit(date)
-	date = addDays(date, 5)
-	createCommit(date)
-	date = addDays(date, 1)
-	createCommit(date)
-}
-
-func addDays(date time.Time, days int) time.Time {
-	return date.Add(time.Hour * 24 * time.Duration(days))
+	date = helpers.AddDays(date, 4)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 6)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 4)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 3)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 3)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 5)
+	helpers.CreateCommit(date)
+	date = helpers.AddDays(date, 1)
+	helpers.CreateCommit(date)
 }
