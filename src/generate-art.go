@@ -81,3 +81,10 @@ func createCommit(date time.Time) {
 		log.Fatal(err)
 	}
 }
+
+func findFirstSunday(date time.Time) time.Time {
+	if int(date.Weekday()) > 0 {
+		return date.Add(time.Hour * 24 * time.Duration(7-int(date.Weekday())))
+	}
+	return date
+}
