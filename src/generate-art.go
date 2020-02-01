@@ -29,7 +29,7 @@ func main() {
 	year = strings.Replace(year, "\n", "", -1)
 	yearParsed, err := strconv.Atoi(year)
 
-	fmt.Print("Select Design [checkered]: ")
+	fmt.Print("Select Design [checkered, give]: ")
 	design, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
@@ -66,7 +66,10 @@ func main() {
 			date = date.Add(time.Hour * 48)
 		}
 	}
-
+	if design == "give" {
+		date = findFirstSunday(date)
+		drawGive(date)
+	}
 }
 
 func createCommit(date time.Time) {
@@ -87,4 +90,83 @@ func findFirstSunday(date time.Time) time.Time {
 		return date.Add(time.Hour * 24 * time.Duration(7-int(date.Weekday())))
 	}
 	return date
+}
+
+func drawGive(date time.Time) {
+	// Shift by a month first
+	date = date.Add(time.Hour * 24 * 7 * 4)
+
+	// Left Arm
+	date = addDays(date, 2)
+	createCommit(date)
+	date = addDays(date, 6)
+	createCommit(date)
+	date = addDays(date, 4)
+	createCommit(date)
+	date = addDays(date, 3)
+	createCommit(date)
+	date = addDays(date, 3)
+	createCommit(date)
+	date = addDays(date, 5)
+	createCommit(date)
+	date = addDays(date, 1)
+	createCommit(date)
+
+	// Left Eye
+	date = addDays(date, 20)
+	createCommit(date)
+	date = addDays(date, 6)
+	createCommit(date)
+	date = addDays(date, 1)
+	createCommit(date)
+
+	// Mouth
+	date = addDays(date, 9)
+	createCommit(date)
+	date = addDays(date, 7)
+	createCommit(date)
+	date = addDays(date, 7)
+	createCommit(date)
+	date = addDays(date, 7)
+	createCommit(date)
+
+	// Right Eye
+	date = addDays(date, 5)
+	createCommit(date)
+	date = addDays(date, 6)
+	createCommit(date)
+	date = addDays(date, 1)
+	createCommit(date)
+
+	// Right Side
+	date = addDays(date, 13)
+	createCommit(date)
+	date = addDays(date, 8)
+	createCommit(date)
+	date = addDays(date, 8)
+	createCommit(date)
+	date = addDays(date, 1)
+	createCommit(date)
+	date = addDays(date, 8)
+	createCommit(date)
+
+	// Right Arm
+	date = addDays(date, 4)
+	createCommit(date)
+	date = addDays(date, 6)
+	createCommit(date)
+	date = addDays(date, 4)
+	createCommit(date)
+	date = addDays(date, 3)
+	createCommit(date)
+	date = addDays(date, 3)
+	createCommit(date)
+	date = addDays(date, 5)
+	createCommit(date)
+	date = addDays(date, 1)
+	createCommit(date)
+}
+
+func addDays(date time.Time, days int) time.Time {
+	return date.Add(time.Hour * 24 * time.Duration(days))
 }
