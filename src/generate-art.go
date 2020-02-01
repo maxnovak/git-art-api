@@ -29,14 +29,14 @@ func main() {
 	year = strings.Replace(year, "\n", "", -1)
 	yearParsed, err := strconv.Atoi(year)
 
-	fmt.Print("Select Design: ")
+	fmt.Print("Select Design [checkered]: ")
 	design, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
 	}
 	design = strings.Replace(design, "\n", "", -1)
 
-	fmt.Printf("Name of Repo '%s' & design '%s:' (y/n): ", repoName, design)
+	fmt.Printf("Name of Repo '%s', design '%s', & year '%v' (y/n): ", repoName, design, yearParsed)
 	confirmation, _, err := reader.ReadRune()
 	if err != nil {
 		log.Fatal(err)
@@ -57,12 +57,14 @@ func main() {
 
 	os.Chdir(repoName)
 	date := time.Date(yearParsed, time.January, 1, 0, 0, 0, 0, time.UTC)
-	for {
-		if date.Year() > yearParsed {
-			break
+	if design == "checkered" {
+		for {
+			if date.Year() > yearParsed {
+				break
+			}
+			createCommit(date)
+			date = date.Add(time.Hour * 48)
 		}
-		createCommit(date)
-		date = date.Add(time.Hour * 48)
 	}
 
 }
