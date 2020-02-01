@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// DrawGive creates a git history with this emote つ ◕_◕ ༽つ
 func DrawGive(date time.Time) {
 	// Shift by a month first
 	date = date.Add(time.Hour * 24 * 7 * 4)

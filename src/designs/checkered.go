@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// DrawCheckered creates a git history with a checkered pattern
 func DrawCheckered(date time.Time, yearForDesign int) {
 	for {
 		if date.Year() > yearForDesign {
