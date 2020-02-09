@@ -31,12 +31,22 @@ func main() {
 	year = strings.Replace(year, "\n", "", -1)
 	yearParsed, err := strconv.Atoi(year)
 
-	fmt.Print("Select Design [checkered, give, table flip]: ")
+	fmt.Print("Select Design [checkered, give, table flip, word]: ")
 	design, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
 	}
 	design = strings.Replace(design, "\n", "", -1)
+
+	var word string
+	if design == "word" {
+		fmt.Print("What word would you like to display? Must be no more than 8 characters:")
+		word, err = reader.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
+		word = strings.Replace(word, "\n", "", -1)
+	}
 
 	fmt.Printf("Name of Repo '%s', design '%s', & year '%v' (y/n): ", repoName, design, yearParsed)
 	confirmation, _, err := reader.ReadRune()
@@ -69,5 +79,9 @@ func main() {
 	if design == "table flip" {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawTableFlip(date)
+	}
+	if design == "word" {
+		date = helpers.FindFirstSunday(date)
+		designs.DrawWord(word, date)
 	}
 }
