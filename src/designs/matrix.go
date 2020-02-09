@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// DrawMatixPatern creates a git history with the passed in matrix design
 func DrawMatixPatern(date time.Time, drawingMatrix [][]int) {
 	for _, element := range drawingMatrix {
 		fmt.Println(element)

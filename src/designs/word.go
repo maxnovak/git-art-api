@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// DrawWord creates a git history based on the passed in word
 func DrawWord(word string, date time.Time) {
 	var characters = []rune(strings.ToLower(word))
 	for _, character := range characters {
