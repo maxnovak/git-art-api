@@ -31,7 +31,7 @@ func main() {
 	year = strings.Replace(year, "\n", "", -1)
 	yearParsed, err := strconv.Atoi(year)
 
-	fmt.Print("Select Design [checkered, give, table flip, word]: ")
+	fmt.Print("Select Design [checkered, give, matrix, table flip, word]: ")
 	design, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
@@ -46,6 +46,16 @@ func main() {
 			log.Fatal(err)
 		}
 		word = strings.Replace(word, "\n", "", -1)
+	}
+
+	var matrixFile string
+	if design == "matrix" {
+		fmt.Print("Please enter the filepath to the matrix you would like to draw: ")
+		matrixFile, err = reader.ReadString('\n')
+		if err != nil {
+			log.Fatal(err)
+		}
+		matrixFile = strings.Replace(matrixFile, "\n", "", -1)
 	}
 
 	fmt.Printf("Name of Repo '%s', design '%s', & year '%v' (y/n): ", repoName, design, yearParsed)
@@ -83,5 +93,9 @@ func main() {
 	if design == "word" {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawWord(word, date)
+	}
+	if design == "matrix" {
+		date = helpers.FindFirstSunday(date)
+
 	}
 }
