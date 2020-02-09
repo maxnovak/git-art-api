@@ -8,3 +8,13 @@ Generates a repository that will do some art in github's work bar - you can choo
 4. Create a repository with the same name in github
 5. Push the contents of the repository up to the new github repository
 6. Observe your new github art :)
+
+## Matrix files
+If you wish to use the matrix design behavior you will need to supply a file for processing.  The file should looks something like this:
+```json
+{
+    "matrix":[
+        [0,1,1,1,0,10,5],
+        [1,0,1,0,1,0,1]]
+}
+```
