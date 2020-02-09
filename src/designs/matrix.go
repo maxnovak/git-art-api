@@ -10,7 +10,7 @@ func DrawMatixPatern(date time.Time, drawingMatrix [][]int) {
 	for _, element := range drawingMatrix {
 		fmt.Println(element)
 		for _, item := range element {
-			if item == 1 {
+			for i := 0; i < item; i++ {
 				helpers.CreateCommit(date)
 			}
 			date = helpers.AddDays(date, 1)
