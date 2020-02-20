@@ -1,7 +1,12 @@
 package designs
 
 import (
+	"encoding/json"
+	"fmt"
 	"git-art/src/helpers"
+	"git-art/src/models"
+	"io/ioutil"
+	"log"
 	"strings"
 	"time"
 )
@@ -11,8 +16,17 @@ func DrawWord(word string, date time.Time) {
 	var characters = []rune(strings.ToLower(word))
 	for _, character := range characters {
 		if character == 'a' {
-			date = drawA(date)
-			date = helpers.AddDays(date, 8)
+			data, err := ioutil.ReadFile("../src/images/a.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			var matrixRequest models.MatrixRequest
+			if err := json.Unmarshal(data, &matrixRequest); err != nil {
+				fmt.Printf("Error whilde decoding %v\n", err)
+				log.Fatal(err)
+			}
+			date = DrawMatixPatern(date, matrixRequest.Matrix)
+			date = helpers.AddDays(date, 7)
 		}
 		if character == 'b' {
 			date = drawB(date)
