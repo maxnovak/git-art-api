@@ -23,32 +23,53 @@ func DrawWord(word string, date time.Time) {
 			date = drawLetter(date, data)
 		}
 		if character == 'b' {
-			date = drawB(date)
-			date = helpers.AddDays(date, 9)
+			data, err := ioutil.ReadFile("../src/images/b.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 		if character == 'c' {
-			date = drawC(date)
-			date = helpers.AddDays(date, 9)
+			data, err := ioutil.ReadFile("../src/images/c.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 		if character == 'd' {
-			date = drawD(date)
-			date = helpers.AddDays(date, 9)
+			data, err := ioutil.ReadFile("../src/images/d.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 		if character == 'e' {
-			date = drawE(date)
-			date = helpers.AddDays(date, 8)
+			data, err := ioutil.ReadFile("../src/images/e.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 		if character == 'f' {
-			date = drawF(date)
-			date = helpers.AddDays(date, 14)
+			data, err := ioutil.ReadFile("../src/images/f.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 		if character == 'g' {
-			date = drawG(date)
-			date = helpers.AddDays(date, 9)
+			data, err := ioutil.ReadFile("../src/images/g.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 		if character == 'h' {
-			date = drawH(date)
-			date = helpers.AddDays(date, 8)
+			data, err := ioutil.ReadFile("../src/images/h.json")
+			if err != nil {
+				log.Fatal(err)
+			}
+			date = drawLetter(date, data)
 		}
 	}
 }
@@ -62,301 +83,6 @@ func drawLetter(date time.Time, data []byte) time.Time {
 	}
 	date = DrawMatixPatern(date, matrixRequest.Matrix)
 	date = helpers.AddDays(date, 7)
-
-	return date
-}
-
-func drawA(date time.Time) time.Time {
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 5)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawB(date time.Time) time.Time {
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawC(date time.Time) time.Time {
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawD(date time.Time) time.Time {
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawE(date time.Time) time.Time {
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawF(date time.Time) time.Time {
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 7)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawG(date time.Time) time.Time {
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 6)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 2)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 3)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-
-	return date
-}
-
-func drawH(date time.Time) time.Time {
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 7)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 7)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 4)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
-	date = helpers.AddDays(date, 1)
-	helpers.CreateCommit(date)
 
 	return date
 }
