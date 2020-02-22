@@ -20,13 +20,7 @@ func DrawWord(word string, date time.Time) {
 			if err != nil {
 				log.Fatal(err)
 			}
-			var matrixRequest models.MatrixRequest
-			if err := json.Unmarshal(data, &matrixRequest); err != nil {
-				fmt.Printf("Error whilde decoding %v\n", err)
-				log.Fatal(err)
-			}
-			date = DrawMatixPatern(date, matrixRequest.Matrix)
-			date = helpers.AddDays(date, 7)
+			date = drawLetter(date, data)
 		}
 		if character == 'b' {
 			date = drawB(date)
@@ -57,6 +51,19 @@ func DrawWord(word string, date time.Time) {
 			date = helpers.AddDays(date, 8)
 		}
 	}
+}
+
+func drawLetter(date time.Time, data []byte) time.Time {
+
+	var matrixRequest models.MatrixRequest
+	if err := json.Unmarshal(data, &matrixRequest); err != nil {
+		fmt.Printf("Error whilde decoding %v\n", err)
+		log.Fatal(err)
+	}
+	date = DrawMatixPatern(date, matrixRequest.Matrix)
+	date = helpers.AddDays(date, 7)
+
+	return date
 }
 
 func drawA(date time.Time) time.Time {
