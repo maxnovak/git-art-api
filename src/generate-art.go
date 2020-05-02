@@ -12,7 +12,7 @@ import (
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print("Console or REST API start? ")
+	fmt.Print("Console or REST API start? [console/rest]")
 	apiType, err := reader.ReadString('\n')
 	apiType = strings.Replace(apiType, "\n", "", -1)
 	if err != nil {
