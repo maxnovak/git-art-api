@@ -1,6 +1,8 @@
 package helpers
 
 import (
+	"os"
+	"os/exec"
 	"testing"
 	"time"
 )
@@ -27,5 +29,18 @@ func TestFindFirstSunday(t *testing.T) {
 	expected = time.Date(2017, time.January, 1, 0, 0, 0, 0, time.UTC)
 	if actual != expected {
 		t.Errorf("Found wrong day, got: %v, want: %v", actual, expected)
+	}
+}
+
+func TestCommit(t *testing.T) {
+	// Create repo for testing commit
+	os.MkdirAll("./test", os.ModePerm)
+	createRepo := exec.Command("git", "init")
+	createRepo.Dir = "test"
+	createRepo.CombinedOutput()
+	CreateCommit(time.Date(2017, time.January, 1, 0, 0, 0, 0, time.UTC))
+	_, err := os.Stat("/test/index")
+	if !os.IsNotExist(err) {
+		t.Errorf("No index file means commit was not created")
 	}
 }
