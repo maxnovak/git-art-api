@@ -22,5 +22,8 @@ func main() {
 	if apiType == "console" {
 		api.Console()
 	}
+	if apiType == "rest" {
+		api.RestAPI()
+	}
 	os.Exit(0)
 }
