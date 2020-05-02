@@ -2,6 +2,7 @@ package api
 
 import "github.com/gin-gonic/gin"
 
+// RestAPI implementation for creating repos as a zip
 func RestAPI() {
 	r := gin.Default()
 	r.GET("/ping", func(c *gin.Context) {
