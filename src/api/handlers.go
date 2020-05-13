@@ -74,10 +74,20 @@ func MakeArt(context *gin.Context) {
 	}
 
 	date := time.Date(json.Year, time.January, 1, 0, 0, 0, 0, time.UTC)
+	if json.Pattern == "checkered" {
+		designs.DrawCheckered(date, json.Year)
+	}
+	if json.Pattern == "give" {
+		date = helpers.FindFirstSunday(date)
+		designs.DrawGive(date)
+	}
+	if json.Pattern == "table flip" {
+		date = helpers.FindFirstSunday(date)
+		designs.DrawTableFlip(date)
+	}
 	if json.Pattern == "word" {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawWord(json.Word, date)
-		os.Chdir("..")
 	}
-
+	os.Chdir("..")
 }
