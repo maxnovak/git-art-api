@@ -1,8 +1,13 @@
 package api
 
 import (
+	"git-art/src/designs"
+	"git-art/src/helpers"
 	"log"
 	"net/http"
+	"os"
+	"os/exec"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -44,4 +49,35 @@ func MakeArt(context *gin.Context) {
 	}
 
 	log.Printf("Request: %+v\n", json)
+
+	log.Println("Creating repository")
+	os.MkdirAll("./"+json.RepoName, os.ModePerm)
+	os.Chdir(json.RepoName)
+
+	createRepo := exec.Command("git", "init")
+	output, err := createRepo.CombinedOutput()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(string(output))
+
+	configureGitAuthor := exec.Command("git", "config", "user.name", json.Name)
+	err = configureGitAuthor.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	configureGitEmail := exec.Command("git", "config", "user.email", json.Email)
+	err = configureGitEmail.Run()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	date := time.Date(json.Year, time.January, 1, 0, 0, 0, 0, time.UTC)
+	if json.Pattern == "word" {
+		date = helpers.FindFirstSunday(date)
+		designs.DrawWord(json.Word, date)
+		os.Chdir("..")
+	}
+
 }
