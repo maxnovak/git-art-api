@@ -8,8 +8,10 @@ import (
 
 // RestAPI implementation for creating repos as a zip
 func RestAPI() {
-	r := gin.Default()
-	r.GET("/ping", Handler)
-	r.Run() // listen and serve on localhost:8080
+	router := gin.Default()
+	router.GET("/ping", Ping)
+	router.POST("/make-art", MakeArt)
+
+	router.Run() // listen and serve on localhost:8080
 	log.Print("Server Started")
 }
