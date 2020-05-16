@@ -82,23 +82,21 @@ func Console() {
 	fmt.Println(string(output))
 
 	date := time.Date(yearParsed, time.January, 1, 0, 0, 0, 0, time.UTC)
+	os.Chdir(repoName)
+
 	if design == "checkered" {
-		os.Chdir(repoName)
 		designs.DrawCheckered(date, yearParsed)
 	}
 	if design == "give" {
 		date = helpers.FindFirstSunday(date)
-		os.Chdir(repoName)
 		designs.DrawGive(date)
 	}
 	if design == "table flip" {
 		date = helpers.FindFirstSunday(date)
-		os.Chdir(repoName)
 		designs.DrawTableFlip(date)
 	}
 	if design == "word" {
 		date = helpers.FindFirstSunday(date)
-		os.Chdir(repoName)
 		designs.DrawWord(word, date)
 	}
 	if design == "matrix" {
@@ -112,7 +110,6 @@ func Console() {
 			fmt.Printf("Error whilde decoding %v\n", err)
 			log.Fatal(err)
 		}
-		os.Chdir(repoName)
 		designs.DrawMatixPatern(date, matrixRequest.Matrix)
 	}
 }
