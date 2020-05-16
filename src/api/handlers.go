@@ -93,4 +93,6 @@ func MakeArt(context *gin.Context) {
 	os.Chdir("..")
 
 	helpers.Zipit(json.RepoName, fmt.Sprintf("%v.zip", json.RepoName))
+
+	context.FileAttachment(fmt.Sprintf("%v.zip", json.RepoName), "file")
 }
