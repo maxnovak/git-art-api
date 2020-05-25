@@ -95,4 +95,7 @@ func MakeArt(context *gin.Context) {
 	helpers.Zipit(json.RepoName, fmt.Sprintf("%v.zip", json.RepoName))
 
 	context.FileAttachment(fmt.Sprintf("%v.zip", json.RepoName), "file")
+
+	os.RemoveAll(json.RepoName)
+	os.Remove(fmt.Sprintf("%v.zip", json.RepoName))
 }
