@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"git-art/src/designs"
 	"git-art/src/helpers"
 	"log"
@@ -90,4 +91,12 @@ func MakeArt(context *gin.Context) {
 		designs.DrawWord(json.Word, date)
 	}
 	os.Chdir("..")
+
+	zipFile := fmt.Sprintf("%v.zip", json.RepoName)
+	helpers.Zipit(json.RepoName, zipFile)
+
+	context.FileAttachment(zipFile, "file")
+
+	os.RemoveAll(json.RepoName)
+	os.Remove(zipFile)
 }
