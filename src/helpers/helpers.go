@@ -38,6 +38,7 @@ func AddDays(date time.Time, days int) time.Time {
 	return date.Add(time.Hour * 24 * time.Duration(days))
 }
 
+// Zipit zips up a directory into a zip file
 func Zipit(source, target string) error {
 	zipfile, err := os.Create(target)
 	if err != nil {
