@@ -99,6 +99,16 @@ func Console() {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawWord(word, date)
 	}
+	if design == "shrug" {
+		date = helpers.FindFirstSunday(date)
+		matrix := helpers.GetDesign("shrug")
+		var matrixRequest models.MatrixRequest
+		if err := json.Unmarshal(matrix, &matrixRequest); err != nil {
+			fmt.Printf("Error whilde decoding %v\n", err)
+			log.Fatal(err)
+		}
+		designs.DrawMatixPatern(date, matrixRequest.Matrix)
+	}
 	if design == "matrix" {
 		date = helpers.FindFirstSunday(date)
 		data, err := ioutil.ReadFile(matrixFile)
