@@ -1,9 +1,11 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
 	"git-art/src/designs"
 	"git-art/src/helpers"
+	"git-art/src/models"
 	"log"
 	"net/http"
 	"os"
@@ -32,8 +34,8 @@ func Ping(context *gin.Context) {
 
 // MakeArt accepts the json request
 func MakeArt(context *gin.Context) {
-	var json Request
-	if err := context.ShouldBindJSON(&json); err != nil {
+	var request Request
+	if err := context.ShouldBindJSON(&request); err != nil {
 		if err.Error() == "EOF" {
 			context.JSON(
 				http.StatusBadRequest,
@@ -49,11 +51,11 @@ func MakeArt(context *gin.Context) {
 		return
 	}
 
-	log.Printf("Request: %+v\n", json)
+	log.Printf("Request: %+v\n", request)
 
 	log.Println("Creating repository")
-	os.MkdirAll("./"+json.RepoName, os.ModePerm)
-	os.Chdir(json.RepoName)
+	os.MkdirAll("./"+request.RepoName, os.ModePerm)
+	os.Chdir(request.RepoName)
 
 	createRepo := exec.Command("git", "init")
 	output, err := createRepo.CombinedOutput()
@@ -62,41 +64,51 @@ func MakeArt(context *gin.Context) {
 	}
 	log.Println(string(output))
 
-	configureGitAuthor := exec.Command("git", "config", "user.name", json.Name)
+	configureGitAuthor := exec.Command("git", "config", "user.name", request.Name)
 	err = configureGitAuthor.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	configureGitEmail := exec.Command("git", "config", "user.email", json.Email)
+	configureGitEmail := exec.Command("git", "config", "user.email", request.Email)
 	err = configureGitEmail.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	date := time.Date(json.Year, time.January, 1, 0, 0, 0, 0, time.UTC)
-	if json.Pattern == "checkered" {
-		designs.DrawCheckered(date, json.Year)
+	date := time.Date(request.Year, time.January, 1, 0, 0, 0, 0, time.UTC)
+	if request.Pattern == "checkered" {
+		designs.DrawCheckered(date, request.Year)
 	}
-	if json.Pattern == "give" {
+	if request.Pattern == "give" {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawGive(date)
 	}
-	if json.Pattern == "table flip" {
+	if request.Pattern == "table flip" {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawTableFlip(date)
 	}
-	if json.Pattern == "word" {
+	if request.Pattern == "word" {
 		date = helpers.FindFirstSunday(date)
-		designs.DrawWord(json.Word, date)
+		designs.DrawWord(request.Word, date)
+	}
+	if request.Pattern == "shrug" {
+		date = helpers.FindFirstSunday(date)
+		matrix := helpers.GetDesign("shrug")
+		var matrixRequest models.MatrixRequest
+		if err := json.Unmarshal(matrix, &matrixRequest); err != nil {
+			fmt.Printf("Error whilde decoding %v\n", err)
+			log.Fatal(err)
+		}
+		designs.DrawMatixPatern(date, matrixRequest.Matrix)
 	}
 	os.Chdir("..")
 
-	zipFile := fmt.Sprintf("%v.zip", json.RepoName)
-	helpers.Zipit(json.RepoName, zipFile)
+	zipFile := fmt.Sprintf("%v.zip", request.RepoName)
+	helpers.Zipit(request.RepoName, zipFile)
 
 	context.FileAttachment(zipFile, "file")
 
-	os.RemoveAll(json.RepoName)
+	os.RemoveAll(request.RepoName)
 	os.Remove(zipFile)
 }
