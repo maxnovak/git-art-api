@@ -2,7 +2,9 @@ package helpers
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -98,4 +100,13 @@ func Zipit(source, target string) error {
 	})
 
 	return err
+}
+
+// GetDesign will return the matrix data for an image
+func GetDesign(design string) []byte {
+	data, err := ioutil.ReadFile(fmt.Sprintf("../src/images/%v.json", design))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return data
 }
