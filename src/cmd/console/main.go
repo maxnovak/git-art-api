@@ -1,4 +1,4 @@
-package api
+package main
 
 import (
 	"bufio"
@@ -17,7 +17,7 @@ import (
 )
 
 // Console implementation of api
-func Console() {
+func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print("Name of Repository: ")
