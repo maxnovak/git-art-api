@@ -19,7 +19,7 @@ type Request struct {
 	Email    string `json:"email" binding:"required"`
 	Pattern  string `json:"pattern" binding:"required"`
 	Word     string `json:"word"`
-	Year     int    `json:"year" binding:"required"`
+	Year     int    `json:"year,string" binding:"required"`
 	RepoName string `json:"repoName" binding:"required"`
 }
 
