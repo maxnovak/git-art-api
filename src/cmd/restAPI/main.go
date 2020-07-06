@@ -5,12 +5,16 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 // RestAPI implementation for creating repos as a zip
 func main() {
 	router := gin.Default()
+
+	router.Use(cors.Default())
+
 	router.GET("/ping", api.Ping)
 	router.POST("/make-art", api.MakeArt)
 
