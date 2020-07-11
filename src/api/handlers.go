@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"git-art/src/designs"
 	"git-art/src/helpers"
+	"git-art/src/models"
 	"log"
 	"net/http"
 	"os"
@@ -15,12 +16,13 @@ import (
 
 // Request object that api accepts for generating git pattern
 type Request struct {
-	Name     string `json:"name" binding:"required"`
-	Email    string `json:"email" binding:"required"`
-	Pattern  string `json:"pattern" binding:"required"`
-	Word     string `json:"word"`
-	Year     int    `json:"year,string" binding:"required"`
-	RepoName string `json:"repoName" binding:"required"`
+	Name     string               `json:"name" binding:"required"`
+	Email    string               `json:"email" binding:"required"`
+	Pattern  string               `json:"pattern" binding:"required"`
+	Word     string               `json:"word"`
+	Year     int                  `json:"year,string" binding:"required"`
+	RepoName string               `json:"repoName" binding:"required"`
+	Matrix   models.MatrixRequest `json:"matrixObj"`
 }
 
 // Ping for ping/pong default endpoint
