@@ -43,4 +43,5 @@ func TestCommit(t *testing.T) {
 	if !os.IsNotExist(err) {
 		t.Errorf("No index file means commit was not created")
 	}
+	os.RemoveAll("./test")
 }
