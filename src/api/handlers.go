@@ -92,6 +92,11 @@ func MakeArt(context *gin.Context) {
 		date = helpers.FindFirstSunday(date)
 		designs.DrawWord(json.Word, date)
 	}
+	if json.Pattern == "matrix" {
+		date = helpers.FindFirstSunday(date)
+		designs.DrawMatixPatern(date, json.Matrix.Matrix)
+	}
+
 	os.Chdir("..")
 
 	zipFile := fmt.Sprintf("%v.zip", json.RepoName)
