@@ -2,6 +2,7 @@ package main
 
 import (
 	"git-art/src/api"
+	"git-art/src/env"
 	"log"
 	"os"
 
@@ -12,6 +13,7 @@ import (
 // RestAPI implementation for creating repos as a zip
 func main() {
 	router := gin.Default()
+	env.Load()
 
 	router.Use(cors.Default())
 
