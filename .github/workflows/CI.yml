@@ -16,3 +16,11 @@ jobs:
         with:
           name: build
           path: bin/
+      - name: Deploy
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.ALWAYS_DATA_HOST }}
+          username: ${{ secrets.ALWAYS_DATA_USER }}
+          password: ${{ secrets.ALWAYS_DATA_PASSWORD }}
+          source: "bin/generate-art"
+          target: "/home/git-art-api"
